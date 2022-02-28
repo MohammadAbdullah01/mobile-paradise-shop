@@ -33,11 +33,17 @@ const loadMobile = () => {
 
 // showing searching result of mobile to UI 
 const showMobile = mobiles => {
+    // console.log(mobiles);
+    if (mobiles.length == 0) {
+        // console.log("paichi ajk tore")
+        const errorMsg = document.getElementById("error-msg");
+        errorMsg.innerText = "no mobile found";
+    }
+
     const container = document.getElementById("main-container");
     container.textContent = "";
     const first20Mobiles = mobiles.slice(0, 20)
     first20Mobiles.forEach(mobile => {
-
         const div = document.createElement("div")
         div.innerHTML = `
         <div class="card">
