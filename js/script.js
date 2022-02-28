@@ -1,3 +1,9 @@
+// function for showing spinner
+const toggleLoading = display => {
+    const loading = document.getElementById("loading");
+    loading.style.display = display;
+}
+
 // onclick function for search button and fetching data of mobiles
 const loadMobile = () => {
     const inputId = document.getElementById("input-field");
@@ -5,11 +11,17 @@ const loadMobile = () => {
     const errorMsg = document.getElementById("error-msg")
     if (isNaN(inputValue) == false) {
         errorMsg.innerText = "type any mobile set name";
+        const container = document.getElementById("main-container");
+        container.textContent = "";
+        const DetailsContainer = document.getElementById("details");
+        DetailsContainer.textContent = "";
         inputId.value = "";
     }
     else {
         const container = document.getElementById("details");
         container.textContent = "";
+
+        toggleLoading("block")
 
         const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`
         fetch(url)
@@ -23,7 +35,8 @@ const loadMobile = () => {
 const showMobile = mobiles => {
     const container = document.getElementById("main-container");
     container.textContent = "";
-    mobiles.forEach(mobile => {
+    const first20Mobiles = mobiles.slice(0, 20)
+    first20Mobiles.forEach(mobile => {
 
         const div = document.createElement("div")
         div.innerHTML = `
@@ -38,9 +51,10 @@ const showMobile = mobiles => {
         `
         div.classList.add("col")
         container.appendChild(div)
-        console.log(mobile)
+        const errorMsg = document.getElementById("error-msg")
+        errorMsg.innerText = ""
     })
-
+    toggleLoading("none")
 
 }
 
@@ -54,13 +68,12 @@ const getDetails = code => {
 
 // show details in UI container 
 const showDetails = details => {
-    console.log(details)
     const container = document.getElementById("details");
     container.textContent = "";
     const div = document.createElement("div")
     container.innerHTML = `
     <div class="card mx-auto w-100">
-    <img src="${details.data.image}" class="card-img-top w-75 mx-auto p-2" alt="...">
+    <img id="details-img" src="${details.data.image}" class="card-img-top mx-auto p-2" alt="...">
         <div class="card-body">
             
             <h4 class="card-title">${details.data.name}</h4>
@@ -88,5 +101,4 @@ const showDetails = details => {
         </div>
     `
     container.appendChild(div)
-
 }

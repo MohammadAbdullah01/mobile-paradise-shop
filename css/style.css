@@ -1,6 +1,12 @@
+#loading{
+    display: none;
+}
 /* media query */
 @media only screen and (min-width: 993px) {
     #details{
+        width: 50%;
+    }
+    #details-img{
         width: 50%;
     }
 }
@@ -8,10 +14,16 @@
     #details{
         width: 75%;
     }
+    #details-img{
+        width: 60%;
+    }
 }
 @media only screen and (max-width: 662px) {
     #details{
         width: 95%;
+    }
+    #details-img{
+        width: 50%;
     }
 }
 

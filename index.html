@@ -16,29 +16,41 @@
 </head>
 
 <body class="container">
-    <h1 class="text-center my-2">Mobile Paradise</h1>
 
-    <!-- search mobile name  -->
-    <div class="input-group my-3 w-75 mx-auto">
-        <input id="input-field" type="text" class="form-control" placeholder="type any mobile set name"
-            aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button onclick="loadMobile()" class="btn btn-outline-secondary" type="button" id="search-btn">Search</button>
-    </div>
+    <!-- header part -->
+    <header>
+        <h1 class="text-center my-2">Mobile Paradise</h1>
 
-    <!-- error messaging part -->
-    <h2 class="text-danger text-center my-3" id="error-msg">
-    </h2>
+        <!-- search mobile name  -->
+        <div class="input-group my-3 w-75 mx-auto">
+            <input id="input-field" type="text" class="form-control" placeholder="type any mobile set name"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button onclick="loadMobile()" class="btn btn-outline-secondary" type="button"
+                id="search-btn">Search</button>
+        </div>
 
-    <!-- details part  -->
+        <!-- spinner  -->
+        <div id="loading" class="text-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
-    <div id="details" class="mx-auto">
+        <!-- error messaging part -->
+        <h2 class="text-danger text-center my-3" id="error-msg">
+        </h2>
+    </header>
 
-    </div>
+    <!-- main part  -->
+    <main>
+        <!-- details part  -->
+        <div id="details" class="mx-auto">
+        </div>
 
-    <!-- main container of mobile  -->
-    <div id="main-container" class="row row-cols-1 row-cols-md-3 g-4 my-3">
-    </div>
-
+        <!-- main container of mobile  -->
+        <div id="main-container" class="row row-cols-1 row-cols-md-3 g-4 my-3">
+        </div>
+    </main>
 
     <!-- bootstrap script link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
