@@ -16,13 +16,12 @@ const loadMobile = () => {
         const DetailsContainer = document.getElementById("details");
         DetailsContainer.textContent = "";
         inputId.value = "";
+        document.getElementById("show-more-btn").style.display = "none"
     }
     else {
         const container = document.getElementById("details");
         container.textContent = "";
-
         toggleLoading("block")
-
         const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`
         fetch(url)
             .then(res => res.json())
@@ -36,11 +35,36 @@ const showMobile = mobiles => {
     if (mobiles.length == 0) {
         const errorMsg = document.getElementById("error-msg");
         errorMsg.innerText = "no mobile found";
+        document.getElementById("show-more-btn").style.display = "none"
     }
 
     const container = document.getElementById("main-container");
     container.textContent = "";
-    const first20Mobiles = mobiles.slice(0, 20)
+    const first20Mobiles = mobiles.slice(0, 20);
+    if (mobiles.length > 20) {
+        const upper20mobiles = mobiles.slice(20, mobiles.length);
+        const showMoreBtn = document.getElementById("show-more-btn");
+        showMoreBtn.style.display = "block"
+        showMoreBtn.addEventListener("click", function () {
+            upper20mobiles.forEach(mobile => {
+                const div = document.createElement("div")
+                div.innerHTML = `
+                    <div class="card card-bg">
+                    <img src="${mobile.image}" class="card-img-top w-75 p-4 mx-auto" alt="...">
+                    <div class="card-body">
+                        <h4 class="card-title common-clr">${mobile.phone_name}</h4>
+                        <h5 class="card-title common-clr">${mobile.brand}</h5>
+                        <button onclick="getDetails('${mobile.slug}')" class="common-btn my-2 py-2">Details</button>
+                    </div>
+                </div>
+                    `
+                div.classList.add("col")
+                container.appendChild(div)
+                const errorMsg = document.getElementById("error-msg")
+                errorMsg.innerText = "";
+            })
+        })
+    }
     first20Mobiles.forEach(mobile => {
         const div = document.createElement("div")
         div.innerHTML = `
@@ -75,7 +99,6 @@ const showDetails = details => {
     const container = document.getElementById("details");
     container.textContent = "";
     const div = document.createElement("div");
-    // div.classList.add("details-bg");
     let others = "Others: ";
     let WLAN = "WLAN: "
     let Bluetooth = "Bluetooth: "
@@ -84,7 +107,7 @@ const showDetails = details => {
     let Radio = "Radio: "
     let USB = "USB :"
     container.innerHTML = `
-    <div class="card details-bg mx-auto w-100">
+    <div class="card details-card mx-auto w-100">
     <img id="details-img" src="${details.data.image}" class="card-img-top mx-auto p-2" alt="...">
         <div class="card-body">
             
@@ -112,6 +135,10 @@ const showDetails = details => {
         </div>
         </div>
     `
-
     container.appendChild(div)
 }
+
+// click function for show more button to hide after one click 
+document.getElementById("show-more-btn").addEventListener("click", function (event) {
+    event.target.style.display = "none"
+})
