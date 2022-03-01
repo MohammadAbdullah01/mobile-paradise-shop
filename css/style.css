@@ -1,6 +1,35 @@
+.common-clr{
+    color:#0A6CCE;
+}
 #loading{
     display: none;
 }
+#input-container{
+    height: 50px;
+}
+#input-field{
+    border: 1px solid #2f32ff;
+}
+.common-btn {
+    background-image: linear-gradient(45deg, #2f32ff 0%, #7412cf  51%, #2f32ff  100%);
+    box-shadow: 0px 0px 14px -7px #f09819;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding:0 20px;
+    font-weight:bold;
+}
+.common-clr{
+    font-weight: bold;
+}
+.card-bg{
+    background-color: rgba(4, 0, 255, 0.164);
+}
+.details-bg{
+    background-color: rgba(80, 175, 131, 0.322);
+    color:rgb(24, 58, 1);
+}
+
 /* media query */
 @media only screen and (min-width: 993px) {
     #details{
